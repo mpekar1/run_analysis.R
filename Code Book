@@ -1,0 +1,72 @@
+The Data
+
+The data comes from Human Activity Recognition database built from the recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors.
+
+The analysis contains the following files:
+  X_train.txt, X_test.txt - containing recorded obsvations (training and testing datasets);
+  Y_train.txt, Y_test.txt - containing activity labels 1-6 referring on the daily activity the subject was performing (training and testing datasets); 
+  subject_train.txt, subject_train.txt - containing an identifier for each volunteer (1-30, training and testing datasets);
+  features - containing the variable names for the datasets of observations; and
+  activity labels - a table showing the activities corresponding to the numbers in the Y_train and Y_test files.
+  
+Variables
+  
+  Activity: 1-6
+    Each volunteeer performed six activities, activity number corresponds to these activities.
+    
+  Subject: 1-30, integers
+    The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years.
+  
+  Labels:
+  A 2*6 vector containing the activity labels:
+    WALKING,
+    WALKING_UPSTAIRS,
+    WALKING_DOWNSTAIRS,
+    SITTING,
+    STANDING,
+    LAYING.
+    
+  Features: 561-feature vector with time and frequency domain variables.  
+  [1] "tBodyAccMeanX"                      "tBodyAccMeanY"                     
+ [3] "tBodyAccMeanZ"                      "tBodyAccStdX"                      
+ [5] "tBodyAccStdY"                       "tBodyAccStdZ"                      
+ [7] "tGravityAccMeanX"                   "tGravityAccMeanY"                  
+ [9] "tGravityAccMeanZ"                   "tGravityAccStdX"                   
+[11] "tGravityAccStdY"                    "tGravityAccStdZ"                   
+[13] "tBodyAccJerkMeanX"                  "tBodyAccJerkMeanY"                 
+[15] "tBodyAccJerkMeanZ"                  "tBodyAccJerkStdX"                  
+[17] "tBodyAccJerkStdY"                   "tBodyAccJerkStdZ"                  
+[19] "tBodyGyroMeanX"                     "tBodyGyroMeanY"                    
+[21] "tBodyGyroMeanZ"                     "tBodyGyroStdX"                     
+[23] "tBodyGyroStdY"                      "tBodyGyroStdZ"                     
+[25] "tBodyGyroJerkMeanX"                 "tBodyGyroJerkMeanY"                
+[27] "tBodyGyroJerkMeanZ"                 "tBodyGyroJerkStdX"                 
+[29] "tBodyGyroJerkStdY"                  "tBodyGyroJerkStdZ"                 
+[31] "tBodyAccMagMean"                    "tBodyAccMagStd"                    
+[33] "tGravityAccMagMean"                 "tGravityAccMagStd"                 
+[35] "tBodyAccJerkMagMean"                "tBodyAccJerkMagStd"                
+[37] "tBodyGyroMagMean"                   "tBodyGyroMagStd"                   
+[39] "tBodyGyroJerkMagMean"               "tBodyGyroJerkMagStd"               
+[41] "fBodyAccMeanX"                      "fBodyAccMeanY"                     
+[43] "fBodyAccMeanZ"                      "fBodyAccStdX"                      
+[45] "fBodyAccStdY"                       "fBodyAccStdZ"                      
+[47] "fBodyAccMeanFreqX"                  "fBodyAccMeanFreqY"                 
+[49] "fBodyAccMeanFreqZ"                  "fBodyAccJerkMeanX"                 
+[51] "fBodyAccJerkMeanY"                  "fBodyAccJerkMeanZ"                 
+[53] "fBodyAccJerkStdX"                   "fBodyAccJerkStdY"                  
+[55] "fBodyAccJerkStdZ"                   "fBodyAccJerkMeanFreqX"             
+[57] "fBodyAccJerkMeanFreqY"              "fBodyAccJerkMeanFreqZ"             
+[59] "fBodyGyroMeanX"                     "fBodyGyroMeanY"                    
+[61] "fBodyGyroMeanZ"                     "fBodyGyroStdX"                     
+[63] "fBodyGyroStdY"                      "fBodyGyroStdZ"                     
+[65] "fBodyGyroMeanFreqX"                 "fBodyGyroMeanFreqY"                
+[67] "fBodyGyroMeanFreqZ"                 "fBodyAccMagMean"                   
+[69] "fBodyAccMagStd"                     "fBodyAccMagMeanFreq"               
+[71] "fBodyBodyAccJerkMagMean"            "fBodyBodyAccJerkMagStd"            
+[73] "fBodyBodyAccJerkMagMeanFreq"        "fBodyBodyGyroMagMean"              
+[75] "fBodyBodyGyroMagStd"                "fBodyBodyGyroMagMeanFreq"          
+[77] "fBodyBodyGyroJerkMagMean"           "fBodyBodyGyroJerkMagStd"           
+[79] "fBodyBodyGyroJerkMagMeanFreq"       "angletBodyAccMean,gravity"         
+[81] "angletBodyAccJerkMean,gravityMean"  "angletBodyGyroMean,gravityMean"    
+[83] "angletBodyGyroJerkMean,gravityMean" "angleX,gravityMean"                
+[85] "angleY,gravityMean"                 "angleZ,gravityMean"
