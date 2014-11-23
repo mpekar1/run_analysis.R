@@ -1,56 +1,49 @@
-# Setting working directory
-if(file.exists("./data")) {
-        setwd("./data")
-} else {
-        dir.create("./data")
-        setwd("./data")
-}
-
-# Downloading and unzipping datafile
+# Setting working directory, downloading and unzipping datafile
+setwd("~/Desktop/Getting and Cleaning Data")
 fileUrl<-"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-download.file(fileUrl,destfile="./temp", method="curl")
-unzip("temp.zip", files = NULL, list = FALSE, overwrite = TRUE, junkpaths = FALSE, exdir ="./data", unzip = "internal", setTimes = FALSE)
+download.file(fileUrl,destfile="./temp.zip", method="curl")
+unzip("temp.zip", files = NULL, list = FALSE, overwrite = TRUE, junkpaths = FALSE, exdir ="./", unzip = "internal", setTimes = FALSE)
 
 # Read raw data files for processing
-training = read.csv("./UCI HAR Dataset/train/X_train.txt", sep="", header=FALSE)
-training[,562] = read.csv("./UCI HAR Dataset/train/Y_train.txt", sep="", header=FALSE)
-training[,563] = read.csv("./UCI HAR Dataset/train/subject_train.txt", sep="", header=FALSE)
+training = read.csv("./UCI HAR Dataset/train/X_train.txt", sep="", header=FALSE) # training dataset/observations
+training[,562] = read.csv("./UCI HAR Dataset/train/Y_train.txt", sep="", header=FALSE) # training labels from 1-6
+training[,563] = read.csv("./UCI HAR Dataset/train/subject_train.txt", sep="", header=FALSE) # training subjects from 1-30
 
-testing = read.csv("./data/UCI HAR Dataset/test/X_test.txt", sep="", header=FALSE)
-testing[,562] = read.csv("./UCI HAR Dataset/test/Y_test.txt", sep="", header=FALSE)
-testing[,563] = read.csv("./UCI HAR Dataset/test/subject_test.txt", sep="", header=FALSE)
+testing = read.csv("./UCI HAR Dataset/test/X_test.txt", sep="", header=FALSE) # test dataset/observations
+testing[,562] = read.csv("./UCI HAR Dataset/test/Y_test.txt", sep="", header=FALSE) # test labels from 1-6
+testing[,563] = read.csv("./UCI HAR Dataset/test/subject_test.txt", sep="", header=FALSE) # test subjects from 1-30
 
-activityLabels = read.csv("./UCI HAR Dataset/activity_labels.txt", sep="", header=FALSE)
+activityLabels = read.csv("./UCI HAR Dataset/activity_labels.txt", sep="", stringsAsFactors=FALSE, header=FALSE) # download activity labels (6*2 matrix)
 
-features = read.csv("./UCI HAR Dataset/features.txt", sep="", header=FALSE)
+features = read.csv("./UCI HAR Dataset/features.txt", sep="", header=FALSE) # download features to replace original variable names
 
-# Merging training and test sets
+# Merging training and test datasets
 mergedData = rbind(training, testing)
 
-# Using descriptive activity names to name the activities in the data set
+# Change activity names to name the activities in the data set
 features[,2] = gsub('-mean', 'Mean', features[,2])
 features[,2] = gsub('-std', 'Std', features[,2])
 features[,2] = gsub('[-()]', '', features[,2])
 
 
 # Extracting the measurements on the mean and standard deviation for each measurement
-columns <- grep(".*Mean.*|.*Std.*", features[,2]) # creating columns mean and standard deviation
-features <- features[columns,] # creating a smaller feagtures table
+columns <- grep(".*Mean.*|.*Std.*", features[,2]) # creating columns with mean and standard deviation for each measurement
+features <- features[columns,] # creating a new features table with only mean and std. for each measurement
 columns <- c(columns, 562, 563) # adding the last two columns (subject, activity)
-mergedData <- mergedData[,columns] # removing redundant columns
-colnames(mergedData) <- c(features$V2, "Activity", "Subject") # adding appropriate column names to the reduced dataset
-colnames(mergedData) <- tolower(colnames(mergedData)) # converting upper-case characters into lower case
+mergedData <- mergedData[,columns] # new dataset with only mean and sdt. measurements
+colnames(mergedData) <- c(features$V2, "activity", "subject") # adding appropriate column names to the reduced dataset
 
-currentActivity = 1
-for (currentActivityLabel in activityLabels$V2) {
-        mergedData$activity <- gsub(currentActivity, currentActivityLabel, mergedData$activity)
-        currentActivity <- currentActivity + 1
+# Replacing numbers with proper activity labels
+activityNumber = 1
+for (activityLabel in activityLabels$V2) {
+        mergedData$activity <- gsub(activityNumber, activityLabel, mergedData$activity)
+        activityNumber <- activityNumber + 1
 }
 
-mergedData$activity <- as.factor(mergedData$activity)
-mergedData$subject <- as.factor(mergedData$subject)
 
+
+# Creating "tidy.txt" dataset
 tidy = aggregate(mergedData, by=list(activity = mergedData$activity, subject=mergedData$subject), mean)
-tidy[,90] = NULL
 tidy[,89] = NULL
+tidy[,90] = NULL
 write.table(tidy, "tidy.txt", sep="\t")
