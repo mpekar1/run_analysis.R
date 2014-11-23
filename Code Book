@@ -11,14 +11,11 @@ The analysis contains the following files:
   
 Variables
   
-  Activity: 1-6
-    Each volunteeer performed six activities, activity number corresponds to these activities.
-    
   Subject: 1-30, integers
     The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years.
   
-  Labels:
-  A 2*6 vector containing the activity labels:
+  Activity:
+  Each volunteer performed six activities, a 'activity' contains the following activity labels:
     WALKING,
     WALKING_UPSTAIRS,
     WALKING_DOWNSTAIRS,
@@ -26,7 +23,13 @@ Variables
     STANDING,
     LAYING.
     
-  Features: 561-feature vector with time and frequency domain variables.  
+  Features: 
+
+  Contains mean ('-Mean-')and standard deviation ('Std-')of time and frequency domain variables.
+  Data was captured using embedded accelerometer and gyroscope. The data contains 3-axial linear acceleration ( '-X', '-Y' and '-Z' directions) and 3-axial angular velocity ('angleX', 'angleY' and 'angleZ') at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. The sensor signals (accelerometer ['-Acc-'] and gyroscope ['-Gyro-') were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational ('-Gravity-') and body motion ('-Body-') components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time ('t-') and frequency ('f-') domain.
+
+  Using the notation above the tidy dataset contains the following 86 variables: 
+ 
   [1] "tBodyAccMeanX"                      "tBodyAccMeanY"                     
  [3] "tBodyAccMeanZ"                      "tBodyAccStdX"                      
  [5] "tBodyAccStdY"                       "tBodyAccStdZ"                      
@@ -70,3 +73,4 @@ Variables
 [81] "angletBodyAccJerkMean,gravityMean"  "angletBodyGyroMean,gravityMean"    
 [83] "angletBodyGyroJerkMean,gravityMean" "angleX,gravityMean"                
 [85] "angleY,gravityMean"                 "angleZ,gravityMean"
+
